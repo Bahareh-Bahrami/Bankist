@@ -153,6 +153,13 @@ btnLogin.addEventListener('click', function (e) {
     //Display Summary
     calcDisplaySummary(currentAccount);
   }
+
+  //If the login is Wrong
+  else {
+    //Display UI and Welcome Message
+    labelWelcome.textContent = `The username or PIN is incorrect`;
+    containerApp.style.opacity = 0;
+  }
 });
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////
