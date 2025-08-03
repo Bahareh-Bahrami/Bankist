@@ -198,6 +198,28 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+//Request Loan
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const request = Number(inputLoanAmount.value);
+
+  if (
+    request > 0 &&
+    currentAccount.movements.some(mov => mov >= request * 0.1)
+  ) {
+    //Add movement
+    currentAccount.movements.push(request);
+
+    //Update UI
+    updateUI(currentAccount);
+  }
+
+  //Clear input fields
+  inputLoanAmount.value = '';
+  inputLoanAmount.blur();
+});
+
 //Close Account
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
@@ -224,17 +246,3 @@ btnClose.addEventListener('click', function (e) {
 
   inputCloseUsername.value = inputClosePin.value = '';
 });
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-////////////////////////////////////////////////////////////////////////
