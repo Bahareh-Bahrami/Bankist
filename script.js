@@ -142,6 +142,7 @@ btnLogin.addEventListener('click', function (e) {
   currentAccount = accounts.find(
     acc => acc.username === inputLoginUsername.value
   );
+  console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     //Display UI and Welcome Message
@@ -195,6 +196,33 @@ btnTransfer.addEventListener('click', function (e) {
     //Update UI
     updateUI(currentAccount);
   }
+});
+
+//Close Account
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+
+    //Delete Account
+    accounts.splice(index, 1);
+
+    //Log user out - Hide UI
+    labelWelcome.textContent = `Your account deleted successfully!`;
+    containerApp.style.opacity = 0;
+
+    if (typeof currentAccount === undefined) {
+      labelWelcome.textContent = `Account not Found!`;
+    }
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////
